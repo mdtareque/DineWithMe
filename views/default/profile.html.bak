@@ -1,0 +1,79 @@
+{{extend 'layout.html'}}
+<h1>This is the default/profile.html template</h1>
+
+{{if profileyes: }}
+<table width="99%" border="0">
+  <tr>
+    <td colspan="2" bgcolor="#00a1f1">
+      <div class="panel panel-info">
+            <div class="panel-heading">
+              <h1 class="panel-title">
+              {{=pr['name']}}
+              </h1>
+    </td>    
+  </tr>
+
+  <tr valign="top">
+  <td bgcolor="#eee" width="500" height="200">
+        
+
+  <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Occupation:</td>
+                        <td>{{=pr['profession']}}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Date of Birth:</td>
+                        <td>{{=pr['dob']}}</td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Gender:</td>
+                        <td>{{=pr['gender']}}</td>
+                      </tr>
+                        <tr>
+                        <td>Home Address:</td>
+                        <td>{{=pr['city']}}</td>
+                      </tr>
+                      
+                     <tr>
+                        <td> Interests </td>
+                        <td> {{for i in pinterest:}}
+                         <span style="color:green"> {{=i['name']}}</span>
+                            {{pass}}
+                         </td>
+                     </tr>
+                     
+                    </tbody>
+                  </table>
+
+
+    </td>
+    <td >
+      
+        <div style="float:right">
+          <img alt="User Pic" src="{{=URL('static/images','boy2.png')}}" width="300" height="300" > 
+        </div>
+    </td>
+
+    
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#00a1f1">
+      <center>
+      TAS - dineWITHme
+      </center>
+    </td>
+  </tr>
+</table>
+
+{{pass}}
+
+    <div style="margin-bottom: 100px">
+        
+    </div>
+{{=profileForm}}

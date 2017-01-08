@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S'<class \'gluon.contrib.pymysql.err.ProgrammingError\'> (1146, u"Table \'dwm_db.requests\' doesn\'t exist")'
+p3
+sS'layer'
+p4
+S'/home/ayush/web2py/applications/DineWithMe/models/db1.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\n\n\ndb.define_table('profile'\n                ,Field('id', 'reference auth_user')\n                ,Field('name', 'string')\n                ,Field('dob', 'date')\n                ,Field('profession', 'string')\n                ,Field('gender', 'string')\n                ,Field('city', 'string')\n                ,auth.signature)\ndb.profile.gender.requires=IS_IN_SET(('Male','Female'))\ndb.profile.profession.requires=IS_IN_SET(('Student', 'Professor', 'Engineer', 'Entrepreneur', 'BusinessMan', 'Traveller', 'Author', 'Other'))\n\ndb.define_table('interestlist' ,Field('name', 'string'))\n\ndb.define_table('interests'\n               ,Field('userid', 'integer')\n               ,Field('iid', 'reference interestlist')\n               )\n\ndb.define_table('requests'\n                ,Field('user_id','reference auth_user' )\n                ,Field('place', 'string')\n                ,Field('rtime', 'datetime')\n                ,Field('foodtype', 'string')\n                ,Field('expiry', 'datetime')\n               )\n\ndb.define_table('messages'\n                ,Field('ts', 'datetime')\n                ,Field('txt' , 'string')\n                ,Field('rid', 'reference messages')\n                )\n\ndb.define_table('chat'\n               ,Field('rid', 'reference requests')\n               ,Field('user_id', 'integer')\n               )\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/ayush/web2py/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/ayush/web2py/applications/DineWithMe/models/db1.py", line 27, in <module>\n    ,Field(\'expiry\', \'datetime\')\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/base.py", line 834, in define_table\n    table = self.lazy_define_table(tablename,*fields,**args)\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/base.py", line 873, in lazy_define_table\n    polymodel=polymodel)\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/adapters/base.py", line 510, in create_table\n    fake_migrate=fake_migrate\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/adapters/base.py", line 623, in migrate_table\n    self.execute(sub_query)\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/adapters/base.py", line 1388, in execute\n    return self.log_execute(*a, **b)\n  File "/home/ayush/web2py/gluon/packages/dal/pydal/adapters/base.py", line 1382, in log_execute\n    ret = self.get_cursor().execute(command, *a[1:], **b)\n  File "/home/ayush/web2py/gluon/contrib/pymysql/cursors.py", line 117, in execute\n    self.errorhandler(self, exc, value)\n  File "/home/ayush/web2py/gluon/contrib/pymysql/connections.py", line 202, in defaulterrorhandler\n    raise errorclass, errorvalue\nProgrammingError: (1146, u"Table \'dwm_db.requests\' doesn\'t exist")\n'
+p11
+s.

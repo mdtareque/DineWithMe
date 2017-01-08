@@ -1,0 +1,52 @@
+body{
+background-image : url(' bi-background-frame.png ');
+background-attachment : fixed;
+background-size : 100% auto;
+}
+.blended_grid{
+display : block;
+width : 900px;
+overflow : auto;
+margin : 30px auto 0 auto;
+}
+.pageHeader{
+background-color : #ffbb00;
+float : left;
+clear : none;
+height : 200px;
+width : 900px;
+}
+.pageLeftMenu{
+background-color : #00a1f1;
+float : left;
+clear : none;
+height : 300px;
+width : 500px;
+text-align: center;
+vertical-align: text-top;
+}
+.pageContent{
+background-color : #7cbb00;
+float : left;
+clear : none;
+height : 300px;
+min-width : 500px;
+}
+.pageFooter{
+background-color : #f65314;
+float : left;
+clear : none;
+height : 100px;
+width : 900px;
+}
+#details {
+ border-radius: 15px;
+text-align: center;
+    font-weight: bold;
+}
+.inte{
+    background-color: #c3f7d5;
+}
+
+#target {
+    background-color: #ffbb00;

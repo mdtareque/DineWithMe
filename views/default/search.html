@@ -1,0 +1,117 @@
+{{extend 'layout.html'}}
+<h1 style="text-align:center">Find like minded people and grab a bite!</h1>
+<!-- {{=BEAUTIFY(response._vars)}} -->
+
+
+<div class="pageLeftMenu" style="margin-left: 50px;">
+    <!--form  id="mainForm" action="{{=URL('default', 'search')}}"-->
+    Where do you want to eat? : <br>
+    <input id="place" type="text" name="place" value="Gachibowli" onblur="updateMap()">
+    <br>
+    What do you want to eat? :<br>
+    <input id="foodtype" type="text" name="foodtype" value="Indian">
+    <br>
+    When do you want to eat? :<br>
+    <input id="time" type="text" name="time" value="16:15">
+    <br><br>
+    <!-- button type="submit" value="Find Requests" onclick="findreq()" -->
+    <INPUT type="button" value="submit"
+       onclick="ajax('{{=URL('default', 'find')}}',['place', 'foodtype', 'time'],'target');"/>
+  <!-- /form> -->
+
+</div>
+<div class="pageContent">
+  <div id='myMap' stye='width: 50vw; height: 50vh;'></div>
+<!--p align="center"> WAIT FOR IT BING MAP COMES HERE!</p-->
+</div>
+
+<div style="clear:both; width: 900px; "></div>
+<div id="target" style="border: 1px solid black; min-height: 400px; widht: 900px; margin: 5px;">
+    
+</div>
+
+<div style="position: fixed; border: 1px solid black; top: 15%; left: 50%; min-width: 400px; margin-left: -200px; min-height: 400px; background-color: white; padding: 50px; background-color: #ededed" id="details">
+    <p>
+       Following people are going to <span id="placedetail" > Gachibowli </span> at <span id="timedetails"> 5 PM</span>
+    </p>
+    <p>
+        Mr. Vinood  - <span class="inte"> Movies, programming</span> <br/>
+        Mr. Raghu - <span class="inte"> Movies, travelling</span>
+    </p>
+    
+    <input type="button" name="commit" value="Commit" />
+    <input type="button" name="close" value="close" onclick="closew()" /> 
+    <div id="minimap" style="width:250px; height:250px; margin: 0 auto; border: 1px solid black">
+    </div>
+</div>
+
+    <script type='text/javascript'>
+            function loadMapScenario() {
+                $('#details').css('display', 'none');
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Ao0XbB8k4XSl4EZ_FSiBsxZQhAX581s2jaK_bjYz63bVzk33X_nOMnhQ3dQQmP4g'
+                });
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var requestOptions = {
+                        bounds: map.getBounds(),
+                        where: 'Hyderabad',
+                        callback: function (answer, userData) {
+                            map.setView({ bounds: answer.results[0].bestView });
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });   
+            }
+            
+            function updateMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Ao0XbB8k4XSl4EZ_FSiBsxZQhAX581s2jaK_bjYz63bVzk33X_nOMnhQ3dQQmP4g'
+                });
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var place = $("#place").val();
+                    console.log("updating map for place " + place);
+                    var requestOptions = {
+                        bounds: map.getBounds(),
+                        where: place,
+                        callback: function (answer, userData) {
+                            map.setView({ bounds: answer.results[0].bestView });
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });   
+            }
+            
+            function findreq() {
+                
+            }
+            function moredetails() {
+                $('#details').css('display', 'block');
+                  var map = new Microsoft.Maps.Map(document.getElementById('minimap'), {
+                    credentials: 'Ao0XbB8k4XSl4EZ_FSiBsxZQhAX581s2jaK_bjYz63bVzk33X_nOMnhQ3dQQmP4g'
+                });
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var place = $("#place").val();
+                    console.log("updating map for place " + place);
+                    var requestOptions = {
+                        bounds: map.getBounds(),
+                        where: place,
+                        callback: function (answer, userData) {
+                            map.setView({ bounds: answer.results[0].bestView });
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });  
+            }
+            function closew() {
+                console.log('closing');
+                $('#details').css('display', 'none');
+            }
+            
+        </script>
+        <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>

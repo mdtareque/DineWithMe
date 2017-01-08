@@ -1,0 +1,238 @@
+timestamp: 2015-11-20T23:48:27.322816
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2015-11-20T23:48:27.596514
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-20T23:48:27.842087
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2015-11-20T23:48:27.988024
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-11-20T23:48:28.143607
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-20T23:48:28.300189
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2017-01-08T09:33:02.388686
+CREATE TABLE auth_user(
+    id INT AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:02.521914
+CREATE TABLE auth_group(
+    id INT AUTO_INCREMENT NOT NULL,
+    role VARCHAR(512),
+    description LONGTEXT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:02.648089
+CREATE TABLE auth_membership(
+    id INT AUTO_INCREMENT NOT NULL,
+    user_id INT  , INDEX user_id__idx (user_id), FOREIGN KEY (user_id) REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INT  , INDEX group_id__idx (group_id), FOREIGN KEY (group_id) REFERENCES auth_group (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:02.817254
+CREATE TABLE auth_permission(
+    id INT AUTO_INCREMENT NOT NULL,
+    group_id INT  , INDEX group_id__idx (group_id), FOREIGN KEY (group_id) REFERENCES auth_group (id) ON DELETE CASCADE,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:02.934588
+CREATE TABLE auth_event(
+    id INT AUTO_INCREMENT NOT NULL,
+    time_stamp DATETIME,
+    client_ip VARCHAR(512),
+    user_id INT  , INDEX user_id__idx (user_id), FOREIGN KEY (user_id) REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin VARCHAR(512),
+    description LONGTEXT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:03.274611
+CREATE TABLE auth_cas(
+    id INT AUTO_INCREMENT NOT NULL,
+    user_id INT  , INDEX user_id__idx (user_id), FOREIGN KEY (user_id) REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on DATETIME,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:33:03.416327
+CREATE TABLE profile(
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(512),
+    dob DATETIME,
+    profession VARCHAR(512),
+    gender VARCHAR(512),
+    city VARCHAR(512),
+    is_active CHAR(1),
+    created_on DATETIME,
+    created_by INT  , INDEX created_by__idx (created_by), FOREIGN KEY (created_by) REFERENCES auth_user (id) ON DELETE CASCADE,
+    modified_on DATETIME,
+    modified_by INT  , INDEX modified_by__idx (modified_by), FOREIGN KEY (modified_by) REFERENCES auth_user (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:36:03.591235
+CREATE TABLE interestlist(
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(512),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:36:03.715980
+CREATE TABLE interests(
+    id INT AUTO_INCREMENT NOT NULL,
+    iid INT  , INDEX iid__idx (iid), FOREIGN KEY (iid) REFERENCES interestlist (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T09:51:21.155912
+ALTER TABLE profile ADD dob__tmp DATE;
+success!
+UPDATE profile SET dob__tmp=dob;
+success!
+ALTER TABLE profile DROP COLUMN dob;
+success!
+ALTER TABLE profile ADD dob DATE;
+success!
+UPDATE profile SET dob=dob__tmp;
+success!
+ALTER TABLE profile DROP COLUMN dob__tmp;
+success!
+success!
+timestamp: 2017-01-08T10:50:38.761347
+ALTER TABLE interests ADD userid INT;
+success!
+success!
+timestamp: 2017-01-08T13:28:17.722536
+CREATE TABLE requests(
+    id INT AUTO_INCREMENT NOT NULL,
+    user_id INT  , INDEX user_id__idx (user_id), FOREIGN KEY (user_id) REFERENCES auth_user (id) ON DELETE CASCADE,
+    place VARCHAR(512),
+    rtime DATETIME,
+    foodtype VARCHAR(512),
+    expiry TIME,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T13:28:17.828716
+CREATE TABLE messages(
+    id INT AUTO_INCREMENT NOT NULL,
+    ts DATETIME,
+    txt VARCHAR(512),
+    rid INT  , INDEX rid__idx (rid), FOREIGN KEY (rid) REFERENCES messages (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T13:28:17.952362
+CREATE TABLE chat(
+    id INT AUTO_INCREMENT NOT NULL,
+    rid INT  , INDEX rid__idx (rid), FOREIGN KEY (rid) REFERENCES requests (id) ON DELETE CASCADE,
+    user_id INT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2017-01-08T13:34:02.126559
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:35:37.679756
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:06.868419
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:06.895637
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:06.928764
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:06.960207
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:06.992605
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:28.398764
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:35.636945
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:39:46.078473
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:40:28.619671
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:40:46.276746
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:41:23.012146
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:41:28.690347
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:41:46.302341
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:42:28.602240
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+timestamp: 2017-01-08T13:42:45.636623
+ALTER TABLE requests ADD expiry__tmp DATETIME;
+success!
+UPDATE requests SET expiry__tmp=expiry;
+success!
+ALTER TABLE requests DROP COLUMN expiry;
+success!
+ALTER TABLE requests ADD expiry DATETIME;
+success!
+UPDATE requests SET expiry=expiry__tmp;
+success!
+ALTER TABLE requests DROP COLUMN expiry__tmp;
+success!
+success!

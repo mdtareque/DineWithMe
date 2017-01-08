@@ -1,0 +1,28 @@
+{{extend 'layout.html'}}
+<h1>Update your interests</h1>
+<h3>
+     Current interests are :
+    {{for i in oldInt:}}
+        <span style="color:green"> {{=i['name']}} </span>,
+    {{pass}}
+
+</h3>
+
+
+<!--
+<form action="{{=URL('default', 'add_interest')}}" name="interestform" method="post">
+{{iis=[]}}    
+<select multiple="multiple"  size="{{=len(iis)}}">
+
+{{for i in iis:}}
+  <option value="{{=i['id']}}">{{=i['name']}}</option>
+{{pass}}
+
+</select>
+
+    <input type="submit" value="submit" />
+</form>
+-->    
+
+
+{{=form}}
