@@ -1,13 +1,9 @@
 # DineWithMe
 Microsoft Code.Fun.Do 7-8 Jan 2017 (IIIT Hyderabad)
 
-[![Demo Video](http://img.youtube.com/vi/dKAb7J6DyFU-Y/0.jpg)](https://www.youtube.com/embed/dKAb7J6DyFU "Demo Video")
+[![DineWithMe - Demo Video](private/screenshots/dwm4.png)](https://www.youtube.com/watch/dKAb7J6DyFU "DineWithMe - Demo Video")
 
-
-Video: https://www.youtube.com/watch?v=dKAb7J6DyFU
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dKAb7J6DyFU" frameborder="0" allowfullscreen></iframe>
-
-![Alt text]( private/screenshots/dwm1.png "")
-![Alt text]( private/screenshots/dwm2.png "")
-![Alt text]( private/screenshots/dwm3.png "")
-![Alt text]( private/screenshots/dwm4.png "")
+![Profile page]( private/screenshots/dwm1.png "")
+![Interest]( private/screenshots/dwm2.png "")
+![Search]( private/screenshots/dwm3.png "")
+![Commit Popup]( private/screenshots/dwm4.png "")
