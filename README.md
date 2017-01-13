@@ -1,7 +1,7 @@
 # DineWithMe
 Microsoft Code.Fun.Do 7-8 Jan 2017 (IIIT Hyderabad)
 
-[![DineWithMe - Demo Video](private/screenshots/dwm3.png)](https://www.youtube.com/watch/dKAb7J6DyFU "DineWithMe - Demo Video")
+[![DineWithMe - Demo Video](private/screenshots/cfd.png)](https://www.youtube.com/watch/dKAb7J6DyFU "DineWithMe - Demo Video")
 
 ![Profile page]( private/screenshots/dwm1.png "")
 ![Interest]( private/screenshots/dwm2.png "")
